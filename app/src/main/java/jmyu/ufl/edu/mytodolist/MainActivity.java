@@ -23,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener((view) -> {
             Toast.makeText(MainActivity.this, "Fab clicked", Toast.LENGTH_LONG).show();
@@ -32,24 +31,18 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setupUI(@NonNull List<Todo> todos) {
         LinearLayout linearLayout = (LinearLayout) findViewById(R.id.main_list_container);
-        linearLayout.removeAllViews();
+        TodoListConverter converter = new TodoListConverter(MainActivity.this, todos);
 
-        for (Todo todo : todos) {
-            View view = getListItemView(todo);
+
+        for (int i = 0; i < todos.size(); ++i) {
+            View view = converter.getView(i);
             linearLayout.addView(view);
         }
     }
-    private View getListItemView(@NonNull Todo todo) {
-        View view = getLayoutInflater().inflate(R.layout.main_list_item, null);
-        ((TextView) view.findViewById(R.id.main_list_item_text)).setText(todo.text);
-        return view;
-    }
-
-
 
     private List<Todo> mockData() {
         List<Todo> list = new ArrayList<>();
-        for (int i = 0; i < 10; ++i) {
+        for (int i = 0; i < 100; ++i) {
             list.add(new Todo("todo " + i, DateUtils.stringToDate("2015 7 29 0:00")));
         }
         return list;
