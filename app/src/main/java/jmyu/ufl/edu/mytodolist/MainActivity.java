@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,14 +31,12 @@ public class MainActivity extends AppCompatActivity {
         setupUI(mockData());
     }
     private void setupUI(@NonNull List<Todo> todos) {
-        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.main_list_container);
-        TodoListConverter converter = new TodoListConverter(MainActivity.this, todos);
+        ListView listView = (ListView) findViewById(R.id.main_list_view);
 
+        TodoListAdapter adapter = new TodoListAdapter(MainActivity.this, todos);
 
-        for (int i = 0; i < todos.size(); ++i) {
-            View view = converter.getView(i);
-            linearLayout.addView(view);
-        }
+        listView.setAdapter(adapter);
+
     }
 
     private List<Todo> mockData() {
