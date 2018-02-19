@@ -2,6 +2,7 @@ package jmyu.ufl.edu.mytodolist;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -24,6 +25,7 @@ public class TodoListConverter {
     }
 
     public View getView(int position) {
+
         View view = LayoutInflater.from(this.context).inflate(R.layout.main_list_item, null);
         Todo todo = data.get(position);
 

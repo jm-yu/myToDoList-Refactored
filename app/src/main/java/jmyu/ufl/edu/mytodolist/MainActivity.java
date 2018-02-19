@@ -42,8 +42,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Todo> mockData() {
         List<Todo> list = new ArrayList<>();
-        for (int i = 0; i < 100; ++i) {
-            list.add(new Todo("todo " + i, DateUtils.stringToDate("2015 7 29 0:00")));
+        for (int i = 0; i < 5000; ++i) {
+            list.add(new Todo("todo " + i, DateUtils.stringToDate("2018 02 14 0:00")));
         }
         return list;
     }
