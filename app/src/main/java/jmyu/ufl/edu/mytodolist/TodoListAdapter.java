@@ -1,6 +1,7 @@
 package jmyu.ufl.edu.mytodolist;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,13 +42,23 @@ public class TodoListAdapter extends BaseAdapter{
 
     @Override
     public View getView(int i, View convertView, ViewGroup viewGroup) {
+        ViewHolder vh;
+        if (convertView == null) {
+            convertView = LayoutInflater.from(this.context).inflate(R.layout.main_list_item, viewGroup, false);
 
-        View view = LayoutInflater.from(this.context).inflate(R.layout.main_list_item, viewGroup, false);
+            vh = new ViewHolder();
+            vh.todoText = (TextView) convertView.findViewById(R.id.main_list_item_text);
+            convertView.setTag(vh);
+        } else {
+            vh = (ViewHolder)convertView.getTag();
+        }
 
         Todo todo = data.get(i);
+        vh.todoText.setText((todo.text));
 
-        ((TextView)view.findViewById(R.id.main_list_item_text)).setText(todo.text);
-
-        return view;
+        return convertView;
+    }
+    private static class ViewHolder{
+        TextView todoText;
     }
 }
