@@ -24,10 +24,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener((view) -> {
             Toast.makeText(MainActivity.this, "Fab clicked", Toast.LENGTH_LONG).show();
         });
+
         setupUI(mockData());
     }
     private void setupUI(@NonNull List<Todo> todos) {
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private List<Todo> mockData() {
         List<Todo> list = new ArrayList<>();
         for (int i = 0; i < 100; ++i) {
-            list.add(new Todo("todo " + i, DateUtils.stringToDate("2015 7 29 0:00")));
+            list.add(new Todo("todo " + i, DateUtils.stringToDate("2018 02 14 0:00")));
         }
         return list;
     }
