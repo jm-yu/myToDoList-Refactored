@@ -27,12 +27,14 @@ public class TodoListAdapter extends RecyclerView.Adapter{
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_list_item, parent, false);
+        return new TodoListViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-
+        Todo todo = data.get(position);
+        ((TodoListViewHolder) holder).todoText.setText(todo.text);
     }
 
     @Override

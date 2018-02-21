@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
@@ -31,12 +33,9 @@ public class MainActivity extends AppCompatActivity {
         setupUI(mockData());
     }
     private void setupUI(@NonNull List<Todo> todos) {
-        ListView listView = (ListView) findViewById(R.id.main_list_view);
-
-        TodoListAdapter adapter = new TodoListAdapter(MainActivity.this, todos);
-
-        listView.setAdapter(adapter);
-
+        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.main_recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new TodoListAdapter(todos));
     }
 
     private List<Todo> mockData() {
