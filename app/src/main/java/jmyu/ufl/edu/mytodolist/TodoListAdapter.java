@@ -1,6 +1,7 @@
 package jmyu.ufl.edu.mytodolist;
 
 import android.content.Context;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,49 +17,28 @@ import jmyu.ufl.edu.mytodolist.models.Todo;
  * Created by jmyu on 2/19/18.
  */
 
-public class TodoListAdapter extends BaseAdapter{
+public class TodoListAdapter extends RecyclerView.Adapter{
 
-    private Context context;
     private List<Todo> data;
 
-    public TodoListAdapter(Context context, List<Todo> todos){
-        this.context = context;
-        this.data = todos;
+    public TodoListAdapter(List<Todo> data) {
+        this.data = data;
     }
+
     @Override
-    public int getCount() {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+    }
+
+    @Override
+    public int getItemCount() {
         return data.size();
     }
 
-    @Override
-    public Object getItem(int i) {
-        return data.get(i);
-    }
 
-    @Override
-    public long getItemId(int i) {
-        return i;
-    }
-
-    @Override
-    public View getView(int i, View convertView, ViewGroup viewGroup) {
-        ViewHolder vh;
-        if (convertView == null) {
-            convertView = LayoutInflater.from(this.context).inflate(R.layout.main_list_item, viewGroup, false);
-
-            vh = new ViewHolder();
-            vh.todoText = (TextView) convertView.findViewById(R.id.main_list_item_text);
-            convertView.setTag(vh);
-        } else {
-            vh = (ViewHolder)convertView.getTag();
-        }
-
-        Todo todo = data.get(i);
-        vh.todoText.setText((todo.text));
-
-        return convertView;
-    }
-    private static class ViewHolder{
-        TextView todoText;
-    }
 }
