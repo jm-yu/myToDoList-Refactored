@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -34,14 +35,14 @@ public class MainActivity extends AppCompatActivity {
     }
     private void setupUI(@NonNull List<Todo> todos) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.main_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         recyclerView.setAdapter(new TodoListAdapter(todos));
     }
 
     private List<Todo> mockData() {
         List<Todo> list = new ArrayList<>();
         for (int i = 0; i < 100; ++i) {
-            list.add(new Todo("todo " + i, DateUtils.stringToDate("2015 7 29 0:00")));
+            list.add(new Todo("todo " + i, DateUtils.stringToDate("2018 02 14 0:00")));
         }
         return list;
     }
