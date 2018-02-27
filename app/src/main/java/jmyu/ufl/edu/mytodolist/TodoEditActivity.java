@@ -59,8 +59,8 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
         }
 
         if (remindDate != null) {
-            dateTv.setText(DateUtils.timeToStringDate(remindDate));
-            timeTv.setText(DateUtils.timeToStringTime(remindDate));
+            //dateTv.setText(DateUtils.timeToStringDate(remindDate));
+            //timeTv.setText(DateUtils.timeToStringTime(remindDate));
         } else {
             dateTv.setText("set_date");
             timeTv.setText("set_time");
@@ -112,7 +112,7 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
         c.set(year, month, dayOfMonth);
 
         remindDate = c.getTime();
-        dateTv.setText(DateUtils.timeToStringDate(remindDate));
+        //dateTv.setText(DateUtils.timeToStringDate(remindDate));
     }
 
     @Override
@@ -122,6 +122,6 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
         c.set(Calendar.MINUTE, minute);
 
         remindDate = c.getTime();
-        dateTv.setText(DateUtils.timeToStringTime(remindDate));
+        //dateTv.setText(DateUtils.timeToStringTime(remindDate));
     }
 }
