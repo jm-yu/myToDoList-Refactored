@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/todo_edit_appbar_height"
+        android:id="@+id/appbar">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/appbar_padding_view_height"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/todo_edit_content"
+            android:layout_marginLeft="@dimen/spacing_medium"
+            android:layout_marginRight="@dimen/spacing_medium"
+            android:layout_marginBottom="@dimen/spacing_medium"
+            android:textSize="@dimen/todo_edit_text_size"
+            android:singleLine="true"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/todo_edit_margin_top"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <LinearLayout
+            android:id="@+id/todo_detail_complete_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp">
+
+            <CheckBox
+                android:id="@+id/todo_detail_complete"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/spacing_xsmall"
+                android:layout_marginRight="@dimen/spacing_xsmall"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_small"
+                android:textSize="@dimen/todo_edit_body_font_size"
+                android:text="Completed" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical">
+            <ImageView
+                android:layout_width="@dimen/icon_width"
+                android:layout_height="@dimen/icon_height"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:src="@drawable/ic_alarm_black_24dp"
+                android:contentDescription="@string/alarm_description" />
+
+            <TextView
+                android:id="@+id/todo_date"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="@dimen/spacing_small"
+                android:layout_marginLeft="@dimen/spacing_small"
+                android:textSize="@dimen/todo_edit_body_font_size"
+                android:background="?attr/selectableItemBackground"
+                tools:text="Mon, Feb 26, 2018"/>
+
+            <TextView
+                android:id="@+id/todo_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/spacing_medium"
+                android:textSize="@dimen/todo_edit_body_font_size"
+                android:background="?attr/selectableItemBackground"
+                tools:text="16:00"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/todo_delete"
+            android:text="@string/action_delete"
+            android:layout_marginRight="@dimen/spacing_medium"
+            android:layout_gravity="end"
+            android:background="?attr/selectableItemBackground"
+            android:padding="@dimen/spacing_xsmall"
+            android:textStyle="bold"
+            android:textSize="@dimen/delete_button_size"
+            android:textColor="@color/colorAccent"/>
+
+    </LinearLayout>
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/todo_finish_edit"
+        android:layout_margin="@dimen/fab_margin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_done_white_24dp"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="bottom|end"/>
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

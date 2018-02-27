@@ -1,5 +1,17 @@
 <resources>
     <dimen name="fab_margin">16dp</dimen>
-    <dimen name="normal_padding">16dp</dimen>
+
+    <dimen name="spacing_xsmall">8dp</dimen>
+    <dimen name="spacing_small">12dp</dimen>
+    <dimen name="spacing_medium">16dp</dimen>
+
     <dimen name="list_divider_height">2dp</dimen>
+    <dimen name="todo_edit_appbar_height">144dp</dimen>
+    <dimen name="appbar_padding_view_height">44dp</dimen>
+    <dimen name="todo_edit_text_size">29sp</dimen>
+    <dimen name="todo_edit_margin_top">44dp</dimen>
+    <dimen name="icon_width">24dp</dimen>
+    <dimen name="icon_height">24dp</dimen>
+    <dimen name="todo_edit_body_font_size">16dp</dimen>
+    <dimen name="delete_button_size">20dp</dimen>
 </resources>
