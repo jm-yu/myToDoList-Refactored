@@ -1,8 +1,11 @@
 package jmyu.ufl.edu.mytodolist;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -35,6 +38,7 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        todo = getIntent().getParcelableExtra(KEY_TODO);
         setupUI();
 
     }
@@ -51,7 +55,7 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
             findViewById(R.id.todo_delete).setVisibility(View.GONE);
         } else {
             todoEdit.setText(todo.text);
-            //completeCb.setChecked(todo.done);
+            completeCb.setChecked(todo.done);
 
             findViewById(R.id.todo_delete).setOnClickListener(v -> {
                 delete();
@@ -59,14 +63,38 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
         }
 
         if (remindDate != null) {
-            //dateTv.setText(DateUtils.timeToStringDate(remindDate));
-            //timeTv.setText(DateUtils.timeToStringTime(remindDate));
+            dateTv.setText(DateUtils.timeToStringDate(remindDate));
+            timeTv.setText(DateUtils.timeToStringTime(remindDate));
         } else {
             dateTv.setText("set_date");
             timeTv.setText("set_time");
         }
 
         setTimePicker();
+        setSaveButton();
+    }
+
+    private void setSaveButton() {
+        FloatingActionButton fab = findViewById(R.id.todo_finish_edit);
+        fab.setOnClickListener(v -> {
+            saveAndExit();
+        });
+    }
+
+    private void saveAndExit() {
+        if (todo == null){
+            todo = new Todo(todoEdit.getText().toString(), remindDate);
+        } else {
+            todo.text = todoEdit.getText().toString();
+            todo.remindDate = remindDate;
+        }
+        todo.done = completeCb.isChecked();
+
+        Intent result = new Intent();
+        result.putExtra(KEY_TODO_ID, todo.id);
+        setResult(Activity.RESULT_OK, result);
+        finish();
+
     }
 
     private void setTimePicker() {
@@ -112,7 +140,7 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
         c.set(year, month, dayOfMonth);
 
         remindDate = c.getTime();
-        //dateTv.setText(DateUtils.timeToStringDate(remindDate));
+        dateTv.setText(DateUtils.timeToStringDate(remindDate));
     }
 
     @Override
@@ -122,6 +150,6 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
         c.set(Calendar.MINUTE, minute);
 
         remindDate = c.getTime();
-        //dateTv.setText(DateUtils.timeToStringTime(remindDate));
+        timeTv.setText(DateUtils.timeToStringTime(remindDate));
     }
 }

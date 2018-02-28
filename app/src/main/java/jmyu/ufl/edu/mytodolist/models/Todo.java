@@ -12,13 +12,13 @@ import java.util.UUID;
 
 public class Todo implements Parcelable{
 
-    //public String id;
+    public String id;
 
     public String text;
 
     public Date remindDate;
 
-    //public boolean done;
+    public boolean done;
 
     public Todo(String text, Date remindDate) {
         this.text = text;
@@ -26,10 +26,10 @@ public class Todo implements Parcelable{
     }
 
     protected Todo(Parcel in) {
-        //id = in.readString();
+        id = in.readString();
         text = in.readString();
         remindDate = new Date(in.readLong());
-        //done = (in.readByte() == 1) ;
+        done = (in.readByte() == 1) ;
     }
 
     public static final Parcelable.Creator<Todo> CREATOR = new Parcelable.Creator<Todo>() {
@@ -51,10 +51,10 @@ public class Todo implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        //dest.writeString(id);
+        dest.writeString(id);
         dest.writeString(text);
         dest.writeLong(remindDate.getTime());
-        //dest.writeByte((byte) (done ? 1 : 0));
+        dest.writeByte((byte) (done ? 1 : 0));
     }
 }
 

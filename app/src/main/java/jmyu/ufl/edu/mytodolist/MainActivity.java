@@ -31,24 +31,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*FloatingActionButton fab = findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener((View v) -> {
             Intent intent = new Intent(MainActivity.this, TodoEditActivity.class);
             startActivityForResult(intent, REQ_CODE_TODO_EDIT);
-        });*/
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Fab clicked", Toast.LENGTH_LONG).show();
-            }
         });
+
 
         setupUI(mockData());
     }
     private void setupUI(@NonNull List<Todo> todos) {
         RecyclerView recyclerView = (RecyclerView) findViewById(R.id.main_recycler_view);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new TodoListAdapter(todos));
     }
 
