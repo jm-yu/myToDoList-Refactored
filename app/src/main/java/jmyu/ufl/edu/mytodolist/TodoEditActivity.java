@@ -91,7 +91,7 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
         todo.done = completeCb.isChecked();
 
         Intent result = new Intent();
-        result.putExtra(KEY_TODO_ID, todo.id);
+        result.putExtra(KEY_TODO, todo);
         setResult(Activity.RESULT_OK, result);
         finish();
 
@@ -131,7 +131,10 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
     }
 
     private void delete(){
-        Toast.makeText(this, "delete clicked", Toast.LENGTH_LONG).show();
+        Intent result = new Intent();
+        result.putExtra(KEY_TODO_ID, todo.id);
+        setResult(Activity.RESULT_OK, result);
+        finish();
     }
 
     @Override
