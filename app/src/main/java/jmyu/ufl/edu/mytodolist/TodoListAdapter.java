@@ -27,16 +27,22 @@ public class TodoListAdapter extends RecyclerView.Adapter{
         this.data = data;
     }
 
+    Context context;
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        context = parent.getContext();
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.main_list_item, parent, false);
-        view.setOnClickListener(v -> Toast.makeText(view.getContext(), "123", Toast.LENGTH_LONG).show());
         return new TodoListViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         Todo todo = data.get(position);
+        holder.itemView.setOnClickListener(v -> {
+            Intent intent = new Intent(context, TodoEditActivity.class);
+            intent.putExtra(TodoEditActivity.KEY_TODO, todo);
+            ((MainActivity)context).startActivityForResult(intent, MainActivity.REQ_CODE_TODO_EDIT);
+        });
         ((TodoListViewHolder) holder).todoText.setText(todo.text);
     }
 

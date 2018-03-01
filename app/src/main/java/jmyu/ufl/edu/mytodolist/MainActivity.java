@@ -26,7 +26,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int REQ_CODE_TODO_EDIT = 100;
+    public static final int REQ_CODE_TODO_EDIT = 100;
     ArrayList<Todo> todos;
     TodoListAdapter adapter;
 

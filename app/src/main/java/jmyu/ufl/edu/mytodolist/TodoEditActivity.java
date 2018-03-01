@@ -39,8 +39,8 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         todo = getIntent().getParcelableExtra(KEY_TODO);
+        remindDate = (todo != null) ? todo.remindDate : null;
         setupUI();
-
     }
     private void setupUI(){
 
