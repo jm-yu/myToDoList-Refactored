@@ -72,6 +72,10 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
             dateTv.setText("set_date");
             timeTv.setText("set_time");
         }
+
+        UIUtils.setTextViewStrikeThrough(todoEdit, completeCb.isChecked());
+        todoEdit.setTextColor(completeCb.isChecked() ? Color.GRAY : Color.WHITE);
+
         setCheckBox();
         setTimePicker();
         setSaveButton();
