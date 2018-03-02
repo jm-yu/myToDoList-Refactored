@@ -5,11 +5,13 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import java.util.Date;
 
 import jmyu.ufl.edu.mytodolist.models.Todo;
 import jmyu.ufl.edu.mytodolist.utils.DateUtils;
+import jmyu.ufl.edu.mytodolist.utils.UIUtils;
 
 public class TodoEditActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
 
@@ -69,9 +72,26 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
             dateTv.setText("set_date");
             timeTv.setText("set_time");
         }
-
+        setCheckBox();
         setTimePicker();
         setSaveButton();
+    }
+
+    private void setCheckBox() {
+        completeCb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                UIUtils.setTextViewStrikeThrough(todoEdit, isChecked);
+                todoEdit.setTextColor(isChecked ? Color.GRAY : Color.WHITE);
+            }
+        });
+        View completeWrapper = findViewById(R.id.todo_detail_complete_wrapper);
+        completeWrapper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                completeCb.setChecked(!completeCb.isChecked());
+            }
+        });
     }
 
     private void setSaveButton() {

@@ -66,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
             }
         }
+        adapter.notifyDataSetChanged();
     }
 
     private void update(Todo todo) {
@@ -93,5 +94,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadData() {
         todos = new ArrayList<>();
+    }
+
+    public void updateTodo(int position, boolean isChecked) {
+        todos.get(position).done = isChecked;
+        adapter.notifyDataSetChanged();
     }
 }

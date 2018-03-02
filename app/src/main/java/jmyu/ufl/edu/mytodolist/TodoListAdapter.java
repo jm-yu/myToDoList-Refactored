@@ -3,17 +3,15 @@ package jmyu.ufl.edu.mytodolist;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.CompoundButton;
 
 import java.util.List;
 
 import jmyu.ufl.edu.mytodolist.models.Todo;
+import jmyu.ufl.edu.mytodolist.utils.UIUtils;
 
 /**
  * Created by jmyu on 2/19/18.
@@ -43,7 +41,16 @@ public class TodoListAdapter extends RecyclerView.Adapter{
             intent.putExtra(TodoEditActivity.KEY_TODO, todo);
             ((MainActivity)context).startActivityForResult(intent, MainActivity.REQ_CODE_TODO_EDIT);
         });
+
         ((TodoListViewHolder) holder).todoText.setText(todo.text);
+        ((TodoListViewHolder) holder).doneCheckbox.setChecked(todo.done);
+        UIUtils.setTextViewStrikeThrough(((TodoListViewHolder) holder).todoText, todo.done);
+
+        ((TodoListViewHolder) holder).doneCheckbox.setOnCheckedChangeListener((v, checked) -> {
+            ((MainActivity)context).updateTodo(position, checked);
+        });
+
+
     }
 
     @Override
