@@ -17,21 +17,17 @@ import jmyu.ufl.edu.mytodolist.AlarmReceiver;
  */
 
 public class AlarmUtils {
-    public static void setAlarm(@NonNull Context context, @NonNull Date date) {
+    public static void setAlarm(@NonNull Context context, @NonNull Date date){
         Calendar c = Calendar.getInstance();
-        if (date.compareTo(c.getTime()) < 0) {
+        if (date.compareTo(c.getTime()) < 0){
             return;
         }
-
         AlarmManager alarmMgr = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
-
         Intent intent = new Intent(context, AlarmReceiver.class);
-        PendingIntent alarmIntent = PendingIntent.getBroadcast(context,
-                0,
-                intent,
-                PendingIntent.FLAG_UPDATE_CURRENT);
-        alarmMgr.set(AlarmManager.RTC_WAKEUP,
-                date.getTime(),
+        PendingIntent alarmIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
+
+        alarmMgr.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+                SystemClock.elapsedRealtime() + 60 * 1000,
                 alarmIntent);
     }
 }

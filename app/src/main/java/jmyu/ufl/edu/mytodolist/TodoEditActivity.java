@@ -108,23 +108,25 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
     }
 
     private void saveAndExit() {
-        if (todo == null){
+        if (todo == null) {
             todo = new Todo(todoEdit.getText().toString(), remindDate);
         } else {
             todo.text = todoEdit.getText().toString();
             todo.remindDate = remindDate;
         }
+
         todo.done = completeCb.isChecked();
 
-        if (remindDate != null){
-            Log.i("alarm has bees set at ", remindDate.toString());
+        if (remindDate != null) {
+            // fire alarm when saving the todo_item
+            Log.i("alarm is set to", remindDate.toString());
             AlarmUtils.setAlarm(this, remindDate);
         }
+
         Intent result = new Intent();
         result.putExtra(KEY_TODO, todo);
         setResult(Activity.RESULT_OK, result);
         finish();
-
     }
 
     private void setTimePicker() {
