@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -22,6 +23,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import jmyu.ufl.edu.mytodolist.models.Todo;
+import jmyu.ufl.edu.mytodolist.utils.AlarmUtils;
 import jmyu.ufl.edu.mytodolist.utils.DateUtils;
 import jmyu.ufl.edu.mytodolist.utils.UIUtils;
 
@@ -114,6 +116,10 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
         }
         todo.done = completeCb.isChecked();
 
+        if (remindDate != null){
+            Log.i("alarm has bees set at ", remindDate.toString());
+            AlarmUtils.setAlarm(this, remindDate);
+        }
         Intent result = new Intent();
         result.putExtra(KEY_TODO, todo);
         setResult(Activity.RESULT_OK, result);

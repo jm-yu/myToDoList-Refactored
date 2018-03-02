@@ -16,7 +16,7 @@ import java.util.Locale;
 public class DateUtils {
     private static DateFormat dateFormat = new SimpleDateFormat("yyyy MM dd HH:mm", Locale.getDefault());
     private static DateFormat timeFormatDate = new SimpleDateFormat("EEE, MMM dd, yyyy", Locale.getDefault());
-    private static DateFormat timeFormatTime = new SimpleDateFormat("HH:MM", Locale.getDefault());
+    private static DateFormat timeFormatTime = new SimpleDateFormat("HH:mm", Locale.getDefault());
 
 
     @NonNull
