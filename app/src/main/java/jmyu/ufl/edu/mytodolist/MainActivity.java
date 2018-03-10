@@ -21,12 +21,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.reflect.TypeToken;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQ_CODE_TODO_EDIT = 100;
+    public static final String TODOS = "todos";
     ArrayList<Todo> todos;
     TodoListAdapter adapter;
 
@@ -47,9 +50,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQ_CODE_TODO_EDIT && resultCode == RESULT_OK){
+        if (requestCode == REQ_CODE_TODO_EDIT && resultCode == RESULT_OK) {
             String todoID = data.getStringExtra(TodoEditActivity.KEY_TODO_ID);
-            if (todoID == null){
+            if (todoID == null) {
                 Todo todo = data.getParcelableExtra(TodoEditActivity.KEY_TODO);
                 update(todo);
             } else {
@@ -59,29 +62,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void delete(String todoID) {
-        for (int i = 0; i < todos.size(); i++){
+        for (int i = 0; i < todos.size(); i++) {
             Todo item = todos.get(i);
-            if (TextUtils.equals(item.id, todoID)){
+            if (TextUtils.equals(item.id, todoID)) {
                 todos.remove(i);
                 break;
             }
         }
+        ModelUtils.save(this, TODOS, todos);
         adapter.notifyDataSetChanged();
     }
 
     private void update(Todo todo) {
         boolean found = false;
-        for (int i = 0; i < todos.size(); i++){
+        for (int i = 0; i < todos.size(); i++) {
             Todo item = todos.get(i);
-            if (TextUtils.equals(item.id, todo.id)){
+            if (TextUtils.equals(item.id, todo.id)) {
                 todos.set(i, todo);
                 found = true;
                 break;
             }
         }
-        if (!found){
+        if (!found) {
             todos.add(todo);
         }
+        ModelUtils.save(this, TODOS, todos);
         adapter.notifyDataSetChanged();
     }
 
@@ -92,12 +97,16 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    private void loadData() {
-        todos = new ArrayList<>();
-    }
-
     public void updateTodo(int position, boolean isChecked) {
         todos.get(position).done = isChecked;
+        ModelUtils.save(this, TODOS, todos);
         adapter.notifyDataSetChanged();
+    }
+
+    private void loadData() {
+        todos = ModelUtils.read(this, TODOS, new TypeToken<ArrayList<Todo>>() {});
+        if (todos == null) {
+            todos = new ArrayList<>();
+        }
     }
 }
