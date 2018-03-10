@@ -3,7 +3,9 @@ package jmyu.ufl.edu.mytodolist;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.NotificationManager;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.FloatingActionButton;
@@ -31,6 +33,7 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
 
     public static final String KEY_TODO = "todo";
     public static final String KEY_TODO_ID = "todo_id";
+    public static final String KEY_NOTIFICATION_ID = "notification_id";
 
     private EditText todoEdit;
     private TextView dateTv;
@@ -46,7 +49,17 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
         todo = getIntent().getParcelableExtra(KEY_TODO);
         remindDate = (todo != null) ? todo.remindDate : null;
         setupUI();
+
+        cancelNotificationIfNeeded();
     }
+
+    private void cancelNotificationIfNeeded() {
+        int notificationId = getIntent().getIntExtra(KEY_NOTIFICATION_ID, -1);
+        if (notificationId != -1) {
+            ((NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE)).cancel(notificationId);
+        }
+    }
+
     private void setupUI(){
 
         setContentView(R.layout.activity_todo_edit);
@@ -120,7 +133,7 @@ public class TodoEditActivity extends AppCompatActivity implements DatePickerDia
         if (remindDate != null) {
             // fire alarm when saving the todo_item
             Log.i("alarm is set to", remindDate.toString());
-            AlarmUtils.setAlarm(this, remindDate);
+            AlarmUtils.setAlarm(this, todo);
         }
 
         Intent result = new Intent();
